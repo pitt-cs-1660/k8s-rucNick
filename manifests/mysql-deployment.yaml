@@ -36,17 +36,17 @@ metadata:
     tier: mysql
 spec:
   selector:
-      matchLabels:
-        app: wordpress
-        tier: mysql
+    matchLabels:
+      app: wordpress
+      tier: mysql
   ##
   # Create app label selectors here
   ##
   template:
     metadata:
-        labels:
-          app: wordpress
-          tier: mysql
+      labels:
+        app: wordpress
+        tier: mysql
     ##
     # Create metadata labels here
     ##
@@ -79,7 +79,7 @@ spec:
         # mount non-sensitive environment vars from configmap
         # MYSQL_DATABASE | MYSQL_USER
         ##
-
+        
         ##
         # mount sensitive environment vars from secret
         # MYSQL_ROOT_PASSWORD | MYSQL_PASSWORD
@@ -87,13 +87,13 @@ spec:
         ports:
         - containerPort: 3306
           name: mysql
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
       ##
       # define volume mounts here, be sure to reference
       # the PVC in your container spec
       ##
-      volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: /var/lib/mysql
       volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
